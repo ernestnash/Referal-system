@@ -13,20 +13,20 @@ class labreport extends Model
 
     public function patient()
     {
-        return $this -> hasMany(patient::class);
+        return $this -> belongsTo(patient::class);
     }
 
     public function physician()
     {
-        return $this -> hasMany(physician::class);
+        return $this -> belongsTo(physician::class);
     }
 
     public function specimen()
     {
-        return $this -> hasMany(specimen::class);
+        return $this -> belongsTo(specimen::class);
     }
     public function labtech()
     {
-        return $this -> hasMany(labtech::class);
+        return $this -> belongsTo(labtech::class);
     }
 }

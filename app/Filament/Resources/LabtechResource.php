@@ -2,16 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\LabtechResource\Pages;
-use App\Filament\Resources\LabtechResource\RelationManagers;
-use App\Models\Labtech;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use App\Models\Labtech;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Card;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\LabtechResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\LabtechResource\RelationManagers;
 
 class LabtechResource extends Resource
 {
@@ -23,7 +26,11 @@ class LabtechResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Card::make()
+                ->schema([
+                TextInput::make('name')
+                ])
+                ->columns(2)
             ]);
     }
 
@@ -31,7 +38,9 @@ class LabtechResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('id')->sortable(),
+                TextColumn::make('name')->sortable()->searchable(),
+                TextColumn::make('created_at')->dateTime()
             ])
             ->filters([
                 //

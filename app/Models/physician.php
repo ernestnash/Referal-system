@@ -13,10 +13,10 @@ class physician extends Model
 
     public function department()
     {
-        return $this -> hasMany(department::class);
+        return $this -> belongsTo(department::class);
     }
     public function specialty()
     {
-        return $this -> hasMany(specialty::class);
+        return $this -> belongsTo(specialty::class);
     }
 }

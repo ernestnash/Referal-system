@@ -9,6 +9,8 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
@@ -29,8 +31,11 @@ class PhysicianResource extends Resource
                 Card::make()
                 ->schema([
                     TextInput::make('name'),
-                    TextInput::make('department'),
-                    TextInput::make('Specialty')
+                    Select::make('department_Id')
+                    ->relationship('department', 'name'),
+                    Select::make('specialty_Id')
+                    ->relationship('specialty', 'name'),
+                    //TextInput::make('contact'),                   
                 ])
                 ->columns(2)
             ]);
