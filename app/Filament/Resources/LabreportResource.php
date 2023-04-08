@@ -30,13 +30,13 @@ class LabreportResource extends Resource
             ->schema([
                 Card::make()
                 ->schema([
-                    Select::make('patient_Id')
+                    Select::make('patient_id')
                     ->relationship('patient', 'name'),
-                    Select::make('physician_Id')
+                    Select::make('physician_id')
                     ->relationship('physician', 'name'),
-                    Select::make('specimen_Id')
+                    Select::make('specimen_id')
                     ->relationship('specimen', 'specimen_type'),
-                    Select::make('labtech_Id')
+                    Select::make('labtech_id')
                     ->relationship('labtech', 'name'),
                     Textarea::make('report')                    
                 ])
@@ -49,11 +49,11 @@ class LabreportResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->sortable(),
-                TextColumn::make('patient_id')->sortable()->searchable(),
-                TextColumn::make('physician_id')->sortable()->searchable(),
-                TextColumn::make('specimen_id')->sortable()->searchable(),
+                TextColumn::make('patient.name')->sortable()->searchable(),
+                TextColumn::make('physician.name')->sortable()->searchable(),
+                TextColumn::make('specimen.specimen_type')->sortable()->searchable(),
                 TextColumn::make('report')->sortable()->searchable(),
-                TextColumn::make('labtech_id'),
+                TextColumn::make('labtech.name'),
                 TextColumn::make('created_at')->dateTime()
             ])
             ->filters([

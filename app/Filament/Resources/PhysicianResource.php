@@ -31,10 +31,10 @@ class PhysicianResource extends Resource
                 Card::make()
                 ->schema([
                     TextInput::make('name'),
-                    Select::make('department_Id')
+                    Select::make('department_id')
                     ->relationship('department', 'name'),
-                    Select::make('specialty_Id')
-                    ->relationship('specialty', 'name'),
+                    Select::make('specialty_id')
+                    ->relationship('specialty', 'name')
                     //TextInput::make('contact'),                   
                 ])
                 ->columns(2)
@@ -47,8 +47,8 @@ class PhysicianResource extends Resource
             ->columns([
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->sortable()->searchable(),
-                TextColumn::make('department')->sortable()->searchable(),
-                TextColumn::make('specialty')->sortable()->searchable(),
+                TextColumn::make('department.name')->sortable()->searchable(),
+                TextColumn::make('specialty.name')->sortable()->searchable(),
                 //TextColumn::make('contact'),
                 TextColumn::make('created_at')->dateTime()
             ])

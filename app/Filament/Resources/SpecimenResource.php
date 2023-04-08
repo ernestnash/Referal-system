@@ -2,16 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SpecimenResource\Pages;
-use App\Filament\Resources\SpecimenResource\RelationManagers;
-use App\Models\Specimen;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use App\Models\Specimen;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\SpecimenResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\SpecimenResource\RelationManagers;
 
 class SpecimenResource extends Resource
 {
@@ -23,7 +27,21 @@ class SpecimenResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Card::make()
+                ->schema([
+                    Select::make('patient_id')
+                    ->relationship('patient', 'name'),
+                    Select::make('specimen_type')
+                    //->multiple()
+                    ->options([
+                        'Blood Sample' => 'Blood Sample',
+                        'Spatum Sample' => 'Spatum Sample',
+                        'Stool Sample' => 'Stool Sample',
+                        'Urine Sample' => 'Urine Sample',
+                    ])
+                    //TextInput::make('contact'),                   
+                ])
+                ->columns(2)
             ]);
     }
 
@@ -31,7 +49,10 @@ class SpecimenResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('id')->sortable(),
+                TextColumn::make('patient.name')->sortable()->searchable(),
+                TextColumn::make('specimen_type')->sortable()->searchable(),
+                TextColumn::make('created_at')->dateTime()
             ])
             ->filters([
                 //

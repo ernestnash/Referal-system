@@ -13,7 +13,7 @@ class specimen extends Model
 
     public function patient()
     {
-        return $this -> hasMany(patient::class);
+        return $this-> belongsTo(patient::class);
     }
     
 }
