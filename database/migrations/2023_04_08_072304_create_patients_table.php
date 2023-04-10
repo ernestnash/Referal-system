@@ -14,10 +14,17 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('date_of_birth');
             $table->string('age');
             $table->string('county');
             $table->string('city');
+            $table->string('identification_method');
+            $table->string('identification_no');
             $table->string('contact');
+            $table->string('next_of_kin_name');
+            $table->string('relationship');
+            $table->string('kin_contact');
+            $table->string('alternative_contact');
             $table->timestamps();
         });
     }

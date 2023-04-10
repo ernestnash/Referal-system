@@ -9,24 +9,24 @@ class referalrequests extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['patient_id', 'physician_id', 'specimen_id', 'patientrecord_id', 'Referal-type', 'Destination'];
+    protected $fillable = ['patient_id', 'physician_id', 'specimen_id', 'patientrecords_id', 'Referal-type', 'Destination'];
 
     public function patient()
     {
-        return $this -> hasMany(patient::class);
+        return $this -> belongsTo(patient::class);
     }
 
     public function physician()
     {
-        return $this -> hasMany(physician::class);
+        return $this -> belongsTo(physician::class);
     }
 
     public function patientrecords()
     {
-        return $this -> hasMany(patientrecords::class);
+        return $this -> belongsTo(patientrecords::class);
     }
     public function specimen()
     {
-        return $this -> hasMany(specimen::class);
+        return $this -> belongsTo(specimen::class);
     }
 }

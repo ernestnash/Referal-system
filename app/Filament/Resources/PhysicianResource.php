@@ -13,10 +13,14 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\PhysicianResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PhysicianResource\RelationManagers;
+use App\Models\department;
+use App\Models\specialty;
+use Nette\Utils\Callback;
 
 class PhysicianResource extends Resource
 {
@@ -30,12 +34,27 @@ class PhysicianResource extends Resource
             ->schema([
                 Card::make()
                 ->schema([
-                    TextInput::make('name'),
+                    TextInput::make('name')->required(),
+                    Select::make('gender')
+                        ->options([
+                            'M' => 'Male',
+                            'F' => 'Female',
+                    ])->required(),
+                    TextInput::make('contact')->required(),
                     Select::make('department_id')
-                    ->relationship('department', 'name'),
+                        ->label('department')
+                        ->options(department::all()->pluck('name', 'id')->toArray())
+                        ->reactive()
+                        ->afterStateUpdated(fn (callable $set)=> $set('specialty_id', null))->required(),
                     Select::make('specialty_id')
-                    ->relationship('specialty', 'name')
-                    //TextInput::make('contact'),                   
+                        ->label('specialty')
+                        ->options(function(callable $get){
+                            $department = department::find($get('department_id'));
+                            if(!$department) {
+                                return specialty::all()->pluck('name', 'id');
+                            }
+                            return $department->specialty->pluck('name', 'id'); 
+                        })->required()               
                 ])
                 ->columns(2)
             ]);
@@ -53,7 +72,7 @@ class PhysicianResource extends Resource
                 TextColumn::make('created_at')->dateTime()
             ])
             ->filters([
-                //
+                SelectFilter::make('department')->relationship('department', 'name')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

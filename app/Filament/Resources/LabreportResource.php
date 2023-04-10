@@ -31,14 +31,14 @@ class LabreportResource extends Resource
                 Card::make()
                 ->schema([
                     Select::make('patient_id')
-                    ->relationship('patient', 'name'),
+                    ->relationship('patient', 'name')->required(),
                     Select::make('physician_id')
-                    ->relationship('physician', 'name'),
+                    ->relationship('physician', 'name')->required(),
                     Select::make('specimen_id')
-                    ->relationship('specimen', 'specimen_type'),
+                    ->relationship('specimen', 'specimen_type')->required(),
                     Select::make('labtech_id')
-                    ->relationship('labtech', 'name'),
-                    Textarea::make('report')                    
+                    ->relationship('labtech', 'name')->required(),
+                    Textarea::make('report')->required()                    
                 ])
                 ->columns(2)
             ]);

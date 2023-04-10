@@ -9,25 +9,25 @@ class patientrecords extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['patient_id', 'physician_id', 'labreport_id', 'department_id', 'Diagnosis', 'prescription'];
+    protected $fillable = ['patient_id', 'physician_id', 'labreport_id', 'department_id', 'Diagnosis', 'Prescription'];
 
     public function patient()
     {
-        return $this -> hasMany(patient::class);
+        return $this -> belongsTo(patient::class);
     }
 
     public function physician()
     {
-        return $this -> hasMany(physician::class);
+        return $this -> belongsTo(physician::class);
     }
 
     public function labreport()
     {
-        return $this -> hasMany(labreport::class);
+        return $this -> belongsTo(labreport::class);
     }
     public function department()
     {
-        return $this -> hasMany(department::class);
+        return $this -> belongsTo(department::class);
     }
 
 

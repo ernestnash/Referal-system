@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('physicians', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('gender');
+            $table->string('contact');
             $table->foreignId('department_id')->constrained()->cascadeOnDelete();
             $table->foreignId('specialty_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

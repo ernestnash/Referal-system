@@ -30,7 +30,7 @@ class SpecimenResource extends Resource
                 Card::make()
                 ->schema([
                     Select::make('patient_id')
-                    ->relationship('patient', 'name'),
+                    ->relationship('patient', 'name')->required(),
                     Select::make('specimen_type')
                     //->multiple()
                     ->options([
@@ -38,7 +38,7 @@ class SpecimenResource extends Resource
                         'Spatum Sample' => 'Spatum Sample',
                         'Stool Sample' => 'Stool Sample',
                         'Urine Sample' => 'Urine Sample',
-                    ])
+                    ])->required()
                     //TextInput::make('contact'),                   
                 ])
                 ->columns(2)

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('patient_id')->constrained()->cascadeOnDelete();
             $table->foreignId('physician_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('patientrecord_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('patientrecords_id')->constrained()->cascadeOnDelete();
             $table->foreignId('specimen_id')->constrained()->cascadeOnDelete();
             $table->string('Referal-type');
             $table->string('Destination');

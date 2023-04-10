@@ -9,6 +9,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
@@ -28,7 +29,9 @@ class SpecialtyResource extends Resource
             ->schema([
                 Card::make()
                 ->schema([
-                TextInput::make('name')
+                TextInput::make('name')->required(),
+                Select::make('department_id')
+                    ->relationship('department', 'name')->required()
                 ])
                 ->columns(2)
             ]);
@@ -40,6 +43,7 @@ class SpecialtyResource extends Resource
             ->columns([
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->sortable()->searchable(),
+                TextColumn::make('department.name')->sortable()->searchable(),
                 TextColumn::make('created_at')->dateTime()
             ])
             ->filters([

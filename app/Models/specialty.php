@@ -9,10 +9,14 @@ class specialty extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'department_id'];
 
     public function physician()
     {
         return $this -> hasMany(physician::class);
+    }
+    public function department()
+    {
+        return $this -> belongsTo(department::class);
     }
 }
