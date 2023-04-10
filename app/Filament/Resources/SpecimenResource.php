@@ -22,6 +22,7 @@ class SpecimenResource extends Resource
     protected static ?string $model = Specimen::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationGroup = 'Lab';
 
     public static function form(Form $form): Form
     {

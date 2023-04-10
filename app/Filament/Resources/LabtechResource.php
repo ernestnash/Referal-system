@@ -20,7 +20,8 @@ class LabtechResource extends Resource
 {
     protected static ?string $model = Labtech::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationGroup = 'Admin Settings';
 
     public static function form(Form $form): Form
     {
@@ -28,7 +29,9 @@ class LabtechResource extends Resource
             ->schema([
                 Card::make()
                 ->schema([
-                TextInput::make('name')->required()
+                TextInput::make('name')
+                    ->required()
+                    ->maxLength(255)
                 ])
                 ->columns(2)
             ]);

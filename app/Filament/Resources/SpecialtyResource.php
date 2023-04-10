@@ -22,6 +22,7 @@ class SpecialtyResource extends Resource
     protected static ?string $model = Specialty::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationGroup = 'Admin Settings';
 
     public static function form(Form $form): Form
     {
@@ -29,9 +30,12 @@ class SpecialtyResource extends Resource
             ->schema([
                 Card::make()
                 ->schema([
-                TextInput::make('name')->required(),
+                TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
                 Select::make('department_id')
-                    ->relationship('department', 'name')->required()
+                    ->relationship('department', 'name')
+                    ->required()
                 ])
                 ->columns(2)
             ]);

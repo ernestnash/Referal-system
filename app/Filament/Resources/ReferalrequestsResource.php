@@ -22,6 +22,7 @@ class ReferalrequestsResource extends Resource
     protected static ?string $model = Referalrequests::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationGroup = 'Physician';
 
     public static function form(Form $form): Form
     {

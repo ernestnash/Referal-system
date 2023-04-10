@@ -26,7 +26,8 @@ class PhysicianResource extends Resource
 {
     protected static ?string $model = Physician::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationGroup = 'Admin Settings';
 
     public static function form(Form $form): Form
     {
@@ -34,7 +35,9 @@ class PhysicianResource extends Resource
             ->schema([
                 Card::make()
                 ->schema([
-                    TextInput::make('name')->required(),
+                    TextInput::make('name')
+                        ->required()
+                        ->maxLength(255),
                     Select::make('gender')
                         ->options([
                             'M' => 'Male',

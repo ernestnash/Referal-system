@@ -26,6 +26,7 @@ class PatientResource extends Resource
     protected static ?string $model = Patient::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationGroup = 'OPD';
 
     public static function form(Form $form): Form
     {
@@ -35,7 +36,9 @@ class PatientResource extends Resource
                 ->schema([
                     Fieldset::make('Patient Details')
                         ->schema([
-                            TextInput::make('name')->required(),
+                            TextInput::make('name')
+                                ->required()
+                                ->maxLength(255),
                             DatePicker::make('date_of_birth')
                                 ->required()
                                 ->reactive()
@@ -64,7 +67,9 @@ class PatientResource extends Resource
                         ]),
                     Fieldset::make('Next Of Kin Details')
                         ->schema([
-                            TextInput::make('next_of_kin_name')->required(),
+                            TextInput::make('next_of_kin_name')
+                                ->required()
+                                ->maxLength(255),
                             Select::make('relationship')
                                 ->options([
                                     'Mother' => 'Mother',

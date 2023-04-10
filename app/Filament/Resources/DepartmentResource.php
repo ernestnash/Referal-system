@@ -20,7 +20,8 @@ class DepartmentResource extends Resource
 {
     protected static ?string $model = Department::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-office-building';
+    protected static ?string $navigationGroup = 'Admin Settings';
 
     public static function form(Form $form): Form
     {
@@ -56,7 +57,7 @@ class DepartmentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\SpecialtyRelationManager::class,
         ];
     }
     
